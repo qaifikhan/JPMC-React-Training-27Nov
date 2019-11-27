@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  padding: 4% 8%;
 }
 
 .App-logo {
@@ -19,4 +19,9 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.ProductGrid {
+  display: flex;
+  flex-wrap: wrap;
 }
