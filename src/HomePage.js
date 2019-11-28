@@ -1,4 +1,6 @@
 import React from 'react';
+import Axios from 'axios';
+
 import classes from './HomePage.module.css';
 
 import { ProductList as ProductData } from './ProductListData';
@@ -9,23 +11,9 @@ class HomePage extends React.Component {
   state = {
     showClothingList: true,
     showAccessoryList: true,
+    productListData: null,
+    showLoader: true
   }
-
-  clothingProducts = ProductData.filter(item => {
-    return !item.isAccessory
-  }).map(item => {
-    return (
-      <ABCard data={item} key={item.id} />
-    )
-  })
-
-  accessoriesProducts = ProductData.filter(item => {
-    return item.isAccessory
-  }).map(item => {
-    return (
-      <ABCard data={item} key={item.id} />
-    )
-  })
 
   onCardVisibilityBtnClick = (type) => {
     switch(type) {
@@ -50,14 +38,39 @@ class HomePage extends React.Component {
     });
   }
 
+  componentDidMount() {
+    Axios.get('http://5d76bf96515d1a0014085cf9.mockapi.io/product')
+    .then(response => this.setState({productListData: response.data, showLoader: false}))
+    .catch(error => {
+      console.log('List call failed')
+    })
+  }
+
   render() {
+    const clothingProducts = this.state.productListData !== null ? this.state.productListData.filter(item => {
+      return !item.isAccessory
+    }).map(item => {
+      return (
+        <ABCard data={item} key={item.id} />
+      )
+    }) : []
+  
+    const accessoriesProducts = this.state.productListData !== null ? this.state.productListData.filter(item => {
+      return item.isAccessory
+    }).map(item => {
+      return (
+        <ABCard data={item} key={item.id} />
+      )
+    }) : null
+
     return (
+      this.state.showLoader ? <h1>Loading...</h1> : 
       <div className={classes.App}>
         <section>
           <h2>Clothing for Men and Women</h2>
           <button onClick={() => this.onCardVisibilityBtnClick('clothing')}>{this.state.showClothingList ? "Hide List" : "Show List"}</button>
           {
-            this.state.showClothingList ? <div className={classes.ProductGrid}>{this.clothingProducts}</div> : null
+            this.state.showClothingList ? <div className={classes.ProductGrid}>{clothingProducts}</div> : null
           }
           
         </section>
@@ -67,7 +80,7 @@ class HomePage extends React.Component {
 
           {
             this.state.showAccessoryList ? 
-            <div className={classes.ProductGrid}>{this.accessoriesProducts}</div>
+            <div className={classes.ProductGrid}>{accessoriesProducts}</div>
             : null
           }
         </section>

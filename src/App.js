@@ -1,15 +1,23 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
 import HomePage from './HomePage';
 import ProductDetails from './ProductDetails';
+import Topbar from './Topbar';
 
 class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        {/* <HomePage /> */}
-        <ProductDetails />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Topbar />
+          <Switch>
+            <Route path="/details" component={ProductDetails} />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
