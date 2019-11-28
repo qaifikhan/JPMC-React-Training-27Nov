@@ -17,8 +17,8 @@ class ProductDetails extends Component {
         this.setState({currentSelectedImgPos: pos});
     }
 
-    getDetails = () => {
-        Axios.get('http://5d76bf96515d1a0014085cf9.mockapi.io/product/1')
+    getDetails = (id) => {
+        Axios.get('http://5d76bf96515d1a0014085cf9.mockapi.io/product/' + id)
         .then(response => {
             this.setState({ 
                 showLoader: false, 
@@ -31,7 +31,8 @@ class ProductDetails extends Component {
     }
 
     componentDidMount() {
-        this.getDetails();
+        const productId = this.props.match.params.productId;
+        this.getDetails(productId);
     }
 
     render() {

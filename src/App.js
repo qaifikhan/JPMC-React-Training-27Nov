@@ -13,7 +13,7 @@ class App extends React.Component {
         <div className="App">
           <Topbar />
           <Switch>
-            <Route path="/details" component={ProductDetails} />
+            <Route path="/details/:productId/" component={ProductDetails} />
             <Route path="/" component={HomePage} />
           </Switch>
         </div>
