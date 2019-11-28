@@ -1,0 +1,11 @@
+.MainContainer {
+    display: flex;
+}
+
+.ProductPreview {
+    width: 35%;
+}
+
+.ProductImages {
+    width: 80px;
+}
