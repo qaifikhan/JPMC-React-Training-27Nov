@@ -1,11 +1,15 @@
+.ProductDetails {
+   width: 100%;
+   padding: 4% 12%;
+   box-sizing: border-box; 
+}
+
 .MainContainer {
     display: flex;
 }
 
 .ProductPreview {
     width: 35%;
-}
-
-.ProductImages {
-    width: 80px;
+    border-radius: 8px;
+    margin-right: 24px;
 }

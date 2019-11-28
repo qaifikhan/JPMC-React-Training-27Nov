@@ -1,3 +1,13 @@
 .ProductImages {
     width: 80px;
+    border-radius: 8px;
+    margin-right: 16px;
+}
+
+.ProductImages:last-of-type {
+    margin-right: 0;
+}
+
+.Active {
+    border: 2px solid teal;
 }
