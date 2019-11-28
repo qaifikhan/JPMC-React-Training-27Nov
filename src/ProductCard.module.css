@@ -5,6 +5,15 @@
     margin: 16px;
 }
 
+.AdProductCard {
+    width: 100%;
+}
+
+.ProductCard > a {
+    text-decoration: none;
+    color: black;
+}
+
 .ProductImage {
     width: 100%;
 }

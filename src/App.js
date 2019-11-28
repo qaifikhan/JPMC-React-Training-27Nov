@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
 import ProductDetails from './ProductDetails';
 import Topbar from './Topbar';
+import NotFound from './NotFound';
 
 class App extends React.Component {
 
@@ -14,7 +15,8 @@ class App extends React.Component {
           <Topbar />
           <Switch>
             <Route path="/details/:productId/" component={ProductDetails} />
-            <Route path="/" component={HomePage} />
+            <Route exact path="/" component={HomePage} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </BrowserRouter>

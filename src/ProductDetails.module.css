@@ -6,14 +6,20 @@
 
 .MainContainer {
     display: flex;
+    width: 100%;
 }
 
 .ProductPreview {
     width: 35%;
+    height: 400px;
     border-radius: 8px;
     margin-right: 24px;
 }
 
-.MainContainer > div:last-of-type {
-    width: 63%;
+.ProductDataSection{
+    width: 45%;
+}
+
+.AdSection {
+    width: 20%;
 }

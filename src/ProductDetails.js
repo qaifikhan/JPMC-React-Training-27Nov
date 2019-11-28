@@ -5,6 +5,7 @@ import {ProductList} from './ProductListData'
 
 import classes from './ProductDetails.module.css';
 import ProductImage from './ProductImage';
+import ProductCard from './ProductCard';
 
 class ProductDetails extends Component {
     state = {
@@ -31,6 +32,15 @@ class ProductDetails extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
+        console.log('Component Did Mount');
+        const productId = this.props.match.params.productId;
+        this.getDetails(productId);
+    }
+
+    componentDidUpdate() {
+        console.log(this.props);
+        console.log('Component Did Update');
         const productId = this.props.match.params.productId;
         this.getDetails(productId);
     }
@@ -40,6 +50,10 @@ class ProductDetails extends Component {
             return <ProductImage imgUrl={item} key={pos} currentPos={this.state.currentSelectedImgPos} pos={pos} imgClick={this.onProductImgClick} />
         }) : [];
 
+        const adProducts = ProductList.map(item => {
+            return <ProductCard data={item} forAdSection={true} />
+        })
+
         return(
             <div className={classes.ProductDetails}>
                 {
@@ -47,7 +61,7 @@ class ProductDetails extends Component {
                     : 
                     <div className={classes.MainContainer}>
                         <img className={classes.ProductPreview} src={this.state.productData.photos[this.state.currentSelectedImgPos]} alt="Apple Watch" />
-                        <div>
+                        <div className={classes.ProductDataSection}>
                             <h1>{this.state.productData.name}</h1>
                             <h2>{this.state.productData.brand}</h2>
                             <div>
@@ -55,6 +69,10 @@ class ProductDetails extends Component {
                             </div>
                             <h3>{this.state.productData.price}</h3>
                             <p>{this.state.productData.description}</p>
+                        </div>
+                        
+                        <div className={classes.AdSection}>
+                            {adProducts}
                         </div>
                     </div>
                 }

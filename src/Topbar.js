@@ -6,7 +6,7 @@ const Topbar = () => {
     return(
         <div className={classes.Topbar}>
             <Link className={classes.MenuItem} to='/'>Home</Link>
-            <Link className={classes.MenuItem} to='/details'>Details</Link>
+            <Link className={classes.MenuItem} to='/login'>Login</Link>
         </div>
     );
 }
