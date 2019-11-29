@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 
-import {ProductList} from './ProductListData'
+import {ProductList} from '../../Utils/ProductListData'
 
 import classes from './ProductDetails.module.css';
-import ProductImage from './ProductImage';
-import ProductCard from './ProductCard';
+import ProductImage from '../../Components/ProductImage/ProductImage';
+import ProductCard from '../../Components/ProductCard/ProductCard';
+import ProgressLoader from '../../Components/ProgressLoader/ProgressLoader';
 
 class ProductDetails extends Component {
     state = {
-        productData: null,
+        productData: ProductList[0],
         showLoader: true,
         currentSelectedImgPos: 0,
     }
@@ -56,11 +57,9 @@ class ProductDetails extends Component {
 
         return(
             <div className={classes.ProductDetails}>
-                {
-                    this.state.showLoader ? <h1>Loading...</h1>
-                    : 
+                <ProgressLoader isLoading={this.state.showLoader}>
                     <div className={classes.MainContainer}>
-                        <img className={classes.ProductPreview} src={this.state.productData.photos[this.state.currentSelectedImgPos]} alt="Apple Watch" />
+                        <img className={classes.ProductPreview} src={this.state.productData.photos!==null?this.state.productData.photos[this.state.currentSelectedImgPos]:null} alt="Apple Watch" />
                         <div className={classes.ProductDataSection}>
                             <h1>{this.state.productData.name}</h1>
                             <h2>{this.state.productData.brand}</h2>
@@ -75,7 +74,7 @@ class ProductDetails extends Component {
                             {adProducts}
                         </div>
                     </div>
-                }
+                </ProgressLoader>
             </div>
         );
     }

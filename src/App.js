@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import HomePage from './HomePage';
-import ProductDetails from './ProductDetails';
-import Topbar from './Topbar';
-import NotFound from './NotFound';
+import HomePage from './Containers/HomePage/HomePage';
+import ProductDetails from './Containers/ProductDetails/ProductDetails';
+import Topbar from './Components/Topbar/Topbar';
+import NotFound from './Containers/NotFoundPage/NotFound';
 
 class App extends React.Component {
 

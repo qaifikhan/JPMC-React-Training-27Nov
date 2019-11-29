@@ -3,15 +3,16 @@ import Axios from 'axios';
 
 import classes from './HomePage.module.css';
 
-import { ProductList as ProductData } from './ProductListData';
+import { ProductList as ProductData } from '../../Utils/ProductListData';
 
-import ABCard from './ProductCard';
+import ABCard from '../../Components/ProductCard/ProductCard';
+import ProgressLoader from '../../Components/ProgressLoader/ProgressLoader';
 
 class HomePage extends React.Component {
   state = {
     showClothingList: true,
     showAccessoryList: true,
-    productListData: null,
+    productListData: ProductData,
     showLoader: true
   }
 
@@ -64,8 +65,8 @@ class HomePage extends React.Component {
     }) : null
 
     return (
-      this.state.showLoader ? <h1>Loading...</h1> : 
       <div className={classes.App}>
+      <ProgressLoader isLoading={this.state.showLoader}> 
         <section>
           <h2>Clothing for Men and Women</h2>
           <button onClick={() => this.onCardVisibilityBtnClick('clothing')}>{this.state.showClothingList ? "Hide List" : "Show List"}</button>
@@ -84,6 +85,7 @@ class HomePage extends React.Component {
             : null
           }
         </section>
+      </ProgressLoader>
       </div>
     );
   }
