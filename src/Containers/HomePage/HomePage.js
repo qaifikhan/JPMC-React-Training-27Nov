@@ -7,6 +7,7 @@ import { ProductList as ProductData } from '../../Utils/ProductListData';
 
 import ABCard from '../../Components/ProductCard/ProductCard';
 import ProgressLoader from '../../Components/ProgressLoader/ProgressLoader';
+import { GETProductList } from '../../WebServices/APIController';
 
 class HomePage extends React.Component {
   state = {
@@ -40,11 +41,13 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('http://5d76bf96515d1a0014085cf9.mockapi.io/product')
-    .then(response => this.setState({productListData: response.data, showLoader: false}))
-    .catch(error => {
-      console.log('List call failed')
+    GETProductList()
+    .then(response => {
+      this.setState({productListData: response, showLoader: false})
     })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   render() {
