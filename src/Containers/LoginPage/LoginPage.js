@@ -6,19 +6,17 @@ import { POST_LOGIN } from '../../WebServices/APIEndpoints';
 import { HOME_PAGE } from '../../Utils/RouteEndpoints';
 
 class LoginPage extends Component {
-    constructor(props) {
-        super(props);
-        this.usernameRef = React.createRef();
-        this.passwordRef = React.createRef();
+    state = {
+        usernameInputValue: '',
+        passwordInputValue: '',
+        usernameInputValid: true,
     }
-
+    
     onSubmitClick = (e) => {
         e.preventDefault();
-        console.log('Value Entered Username => ', this.usernameRef.current.value);
-        console.log('Value Entered Password => ', this.passwordRef.current.value);
         const data = {
-            username: this.usernameRef.current.value,
-            password: this.passwordRef.current.value
+            username: this.state.usernameInputValue,
+            password: this.state.passwordInputValue
         }
         Axios.post(POST_LOGIN, data)
         .then(response => {
@@ -31,13 +29,32 @@ class LoginPage extends Component {
         })
     }
 
+    onInputValChange = (e, type) => {
+        console.log(e.target.value);
+        switch(type) {
+            case 'username':
+                //Check if it is valid
+                this.setState({usernameInputValue: e.target.value});
+                break;
+            case 'password':
+                this.setState({passwordInputValue: e.target.value});
+                break;
+            default: break;
+        }
+    }
+
     render() {
         return(
             <div className={classes.MainContainer}>
             <h1>Login Page</h1>
             <form onSubmit={this.onSubmitClick}>
-                <input ref={this.usernameRef} type="text" name="username" placeholder="Username" />
-                <input ref={this.passwordRef} type="password" name="password" placeholder="Password" />
+                <input type="text" name="username" placeholder="Username" value={this.state.usernameInputValue} onInput={(e) => this.onInputValChange(e, 'username')} />
+                {
+                    this.state.usernameInputValid? null :
+                    <p>Please enter a valid username</p>
+                }
+
+                <input type="password" name="password" placeholder="Password" value={this.state.passwordInputValue} onInput={(e) => this.onInputValChange(e, 'password')} />
 
                 <input type="submit" value="Login" />
             </form>

@@ -5,8 +5,9 @@ import HomePage from './Containers/HomePage/HomePage';
 import ProductDetails from './Containers/ProductDetails/ProductDetails';
 import Topbar from './Components/Topbar/Topbar';
 import NotFound from './Containers/NotFoundPage/NotFound';
-import { NOT_FOUND, NOT_FOUND_PAGE, HOME_PAGE, PRODUCT_DETAILS_PAGE, LOGIN_PAGE } from './Utils/RouteEndpoints';
+import { NOT_FOUND, NOT_FOUND_PAGE, HOME_PAGE, PRODUCT_DETAILS_PAGE, LOGIN_PAGE, COUNTER_PAGE } from './Utils/RouteEndpoints';
 import LoginPage from './Containers/LoginPage/LoginPage';
+import CounterPage from './Containers/CounterPage/CounterPage';
 
 class App extends React.Component {
   state = {
@@ -32,6 +33,7 @@ class App extends React.Component {
             } } />
             <Route path={NOT_FOUND_PAGE} component={NotFound} />
             <Route path={LOGIN_PAGE} render={(props) => <LoginPage {...props} onUserLoggedIn={this.onUserLoggedIn} />} />
+            <Route path={COUNTER_PAGE} component={CounterPage} />
             <Route exact path={HOME_PAGE} component={HomePage} />
             <Route component={NotFound} />
           </Switch>

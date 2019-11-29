@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import classes from './Topbar.module.css';
 import { HOME_PAGE, LOGIN_PAGE } from '../../Utils/RouteEndpoints';
+import { globalAgent } from 'http';
 
 const Topbar = (props) => {
     return(
@@ -13,8 +16,17 @@ const Topbar = (props) => {
                 :
                 <Link className={classes.MenuItem} to={LOGIN_PAGE}>Login</Link>
             }
+
+            <p>Like Count: {props.totLikes}</p>
         </div>
     );
 }
 
-export default Topbar;
+const mapGlobalStateToProps = (globalState) => {
+    return {
+        totLikes: globalState.totalLikes,
+        cartCount: globalState.totalCartCount
+    }
+}
+
+export default connect(mapGlobalStateToProps)(Topbar);
